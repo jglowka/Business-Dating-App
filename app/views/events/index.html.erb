@@ -1,35 +1,35 @@
 
-<h1>All Events</h1>
+<h1 class="m-2 text-center">List of all events available</h1>
 
-<table>
-  <tr>
-    <th>Subject</th>
-    <th>Location</th>
-    <th>Description</th>
-    <th>Start date</th>
-    <th>Start time</th>
-    <th>End date</th>
-    <th>End time</th>
-    <th>Participants</th>
-    <th colspan="3"></th>
-  </tr>
+<div class="container ">
+  <div class="row m-2 border-bottom font-weight-bold">
+    <div class="col-sm ">
+      Subject
+    </div>
+    <div class="col-sm ">
+      Location
+    </div>
+    <div class="col-sm ">
+      Date
+    </div>
 
-  <% @events.each do |event| %>
-    <tr>
-      <td><%= event.subject %></td>
-      <td><%= event.location %></td>
-      <td><%= event.description %></td>
-      <td><%= event.start_date %></td>
-      <td><%= event.start_time %></td>
-      <td><%= event.end_date %></td>
-      <td><%= event.end_time %></td>
-      <td><%= event.max_users %></td>
+  </div>
 
-      <td><%= link_to 'Show', event_path(event) %></td>
-      <td><%= link_to 'Edit', edit_event_path(event) %></td>
-      <td><%= link_to 'Delete', event_path(event),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+
+<% @events.each do |event| %>
+  <%= link_to event_path(event), class:"text-dark" do %>
+    <div class="row m-2 border">
+      <div class="col-sm r">
+        <%= event.subject %>
+      </div>
+      <div class="col-sm ">
+        <%= event.location %>
+      </div>
+      <div class="col-sm ">
+        <%= event.start_date %>  <%= event.start_time %> - <%= event.end_date %>  <%= event.end_time %>
+      </div>
+
+    </div>
+    <% end %>
+<% end %>
+</div>

@@ -9,8 +9,51 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <%= link_to 'Business Dating App', events_path, class:"navbar-brand text-danger" %>
+
+
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to 'New Event', new_event_path, class: "nav-link" %>
+            <% end %>
+        </li>
+      </ul>
+        <ul class="navbar-nav ml-2">
+        <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">My Events</a>
+            <div class="dropdown-divider"></div>
+              <%= link_to 'Sign out', destroy_user_session_path, :method => :delete, class: 'dropdown-item', class:  "dropdown-item"%></a>
+          </div>
+        </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link " <%= link_to "Sign In", new_user_session_path%></a>
+          </li>
+            <li class="">
+                <%= link_to "Register",  new_user_registration_path, class: "btn btn-outline-success"%></button>
+            </li>
+
+        <% end %>
+      </ul>
+
+  </nav>
+
+<div class="text-center">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+</div>
+
+  <div class="container">
     <%= yield %>
+  </div>
   </body>
 </html>

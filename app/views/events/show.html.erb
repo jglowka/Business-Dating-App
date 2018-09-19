@@ -1,43 +1,106 @@
+<div class="container">
+  <div class="row">
+    <div class="col border-right">
+      <div class="m-2">
+        <h4>Event Details:</h4>
+      </div>
+      <div class="m-2">
 
-<p>
-  <strong>Subject:</strong>
-  <%= @event.subject %>
-</p>
+        <strong>Subject:</strong></br>
+        <%= @event.subject %>
+      </div>
 
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
+      <div class="m-2">
+        <strong>Location:</strong></br>
+        <%= @event.location %>
+      </div>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date %>
-</p>
+      <div class="m-2">
+        <strong>Start:</strong></br>
+        <%= @event.start_date %>  <%= @event.start_time %>
+      </div>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @event.start_time %>
-</p>
+      <div class="m-2">
+        <strong>Finish:</strong></br>
+        <%= @event.end_date %>  <%= @event.end_time %>
+      </div>
 
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date %>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= @event.end_time %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Participants:</strong>
-  <%= @event.max_users %>
-</p>
+      <div class="m-2">
+        <strong>Description:</strong></br>
+        <%= @event.description %>
+      </div>
+      <div class="m-2">
+        <strong>Created by: </strong></br>
+        <%= @event.user.email %>
+      </div>
 
 
-<%= link_to 'Back', events_path %>
+    </div>
+    <div class="col-8">
+
+      <div class="m-2">
+
+        <h4>Attendance List: <span class="badge badge-secondary"><%= @event.atendees.count %> / <%= @event.max_users %></span></h4>
+
+      </div>
+
+
+      <% if !@userIsOnList and @event.atendees.count<@event.max_users+10%>
+        <%= form_with(model: [ @event, @event.atendees.build ], local: true) do |form| %>
+          <p>
+            <%= form.submit 'Sign up for event Event', class: "btn btn-success" %>
+          </p>
+        <% end %>
+        <div>
+          <button class="btn btn-danger" disabled>Resign from event</button>
+        </div>
+
+
+      <% else %>
+        <button class="btn btn-success" disabled>Sign up for event Event</button>
+      <% end %>
+
+      <div id="destination">
+      </div>
+
+
+      <% @event.atendees.each do |atendee| %>
+        <div class="row m-2 border-bottom">
+          <div class="col">
+
+            <% @users.each do |u| %>
+              <% if  u.id ==  atendee.user_id %>
+                <%= u.email %>
+
+              <% end %>
+            <% end %>
+
+          </div>
+
+          <div class="col" id="source">
+            <div id="item">
+              <% if current_user.id == atendee.user_id %>
+                <%= link_to 'Resign from event', [atendee.event, atendee],
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' },
+                            class: "btn btn-danger"%>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      <% end %>
+
+
+
+      <!--    <%#= render @event.atendees %>-->
+
+
+
+
+
+    </div>
+  </div>

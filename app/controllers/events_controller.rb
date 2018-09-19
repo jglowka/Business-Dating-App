@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+
+
   def index
     @events = Event.all
   end
@@ -7,6 +9,13 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+
+
+    @users = User.all
+    @userIsOnList = Atendee.where(user_id: current_user.id).where(event_id: @event).exists?
+    @attendee =  Atendee.where(user_id: current_user.id).where(event_id: @event).first
+
+
   end
 
   def new

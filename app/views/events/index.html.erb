@@ -15,21 +15,40 @@
 
   </div>
 
+  <% if user_signed_in? %>
+    <% @events.each do |event| %>
+      <%= link_to event_path(event), class:"text-dark" do %>
+        <div class="row m-2 border">
+          <div class="col-sm r">
+            <%= event.subject %>
+          </div>
+          <div class="col-sm ">
+            <%= event.location %>
+          </div>
+          <div class="col-sm ">
+            <%= event.start_date %>  <%= event.start_time %> - <%= event.end_date %>  <%= event.end_time %>
+          </div>
 
-<% @events.each do |event| %>
-  <%= link_to event_path(event), class:"text-dark" do %>
-    <div class="row m-2 border">
-      <div class="col-sm r">
-        <%= event.subject %>
-      </div>
-      <div class="col-sm ">
-        <%= event.location %>
-      </div>
-      <div class="col-sm ">
-        <%= event.start_date %>  <%= event.start_time %> - <%= event.end_date %>  <%= event.end_time %>
-      </div>
-
-    </div>
+        </div>
+      <% end %>
     <% end %>
-<% end %>
+  <% else %>
+    <% @events.each do |event| %>
+      <div class="text-dark" >
+        <div class="row m-2 border">
+          <div class="col-sm r">
+            <%= event.subject %>
+          </div>
+          <div class="col-sm ">
+            <%= event.location %>
+          </div>
+          <div class="col-sm ">
+            <%= event.start_date %>  <%= event.start_time %> - <%= event.end_date %>  <%= event.end_time %>
+          </div>
+
+        </div>
+      </div>>
+    <% end %>
+
+  <% end %>
 </div>

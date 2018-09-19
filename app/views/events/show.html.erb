@@ -45,7 +45,7 @@
       </div>
 
 
-      <% if !@userIsOnList and @event.atendees.count<@event.max_users+10%>
+      <% if !@userIsOnList and @event.atendees.count<@event.max_users %>
         <%= form_with(model: [ @event, @event.atendees.build ], local: true) do |form| %>
           <p>
             <%= form.submit 'Sign up for event Event', class: "btn btn-success" %>

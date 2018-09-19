@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918002703) do
+ActiveRecord::Schema.define(version: 20180919004150) do
 
   create_table "atendees", force: :cascade do |t|
     t.integer "event_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
     t.index ["event_id"], name: "index_atendees_on_event_id"
     t.index ["user_id"], name: "index_atendees_on_user_id"
   end
@@ -30,7 +31,6 @@ ActiveRecord::Schema.define(version: 20180918002703) do
     t.text "end_date"
     t.text "description"
     t.integer "max_users"
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

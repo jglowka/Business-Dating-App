@@ -19,7 +19,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event =current_user.events.build
+
   end
 
   def edit # edit not implemented
@@ -35,7 +35,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = Event.new(event_params)
 
     if @event.save
     redirect_to @event
